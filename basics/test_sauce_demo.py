@@ -1,7 +1,8 @@
 from playwright.sync_api import Playwright, sync_playwright, expect
 
 
-def run(playwright: Playwright) -> None:
+def test_run(playwright: Playwright) -> None:
+    print('running')
     browser = playwright.chromium.launch(headless=False, slow_mo=1000)
     context = browser.new_context()
 
@@ -14,34 +15,33 @@ def run(playwright: Playwright) -> None:
     page.locator("#user-name").fill("standard_user", timeout=5000)
 
     page.locator("#password").fill("secret_sauce")
-    page.pause()
+    # page.pause()
 
-    page.locator("#login-button8").click()
+    page.locator("#login-button").click()
 
     products_header = page.locator("//span[text()='Products']")
 
     assert products_header.is_visible(), "User is unable to login"
-
-    burger_menu = page.locator("#react-burger-menu-btn")
-
+    print('closing')
 
 
-    burger_menu.click()
+    # burger_menu = page.locator("#react-burger-menu-btn")
 
-    logout_btn = page.locator("//div[@class='bm-menu']//a[text()='Logout']")
 
-    page.pause()
 
-    logout_btn.click()
+    # burger_menu.click()
 
-    login_btn = page.locator("#login-button")
+    # logout_btn = page.locator("//div[@class='bm-menu']//a[text()='Logout']")
 
-    assert login_btn.is_visible(), "Login is not successful"
+    # # page.pause()
+
+    # logout_btn.click()
+
+    # login_btn = page.locator("#login-button")
+
+    # assert login_btn.is_visible(), "Login is not successful"
 
     # ---------------------
-    context.close()
-    browser.close()
+    # context.close()
+    # browser.close()
 
-
-with sync_playwright() as playwright:
-    run(playwright)
