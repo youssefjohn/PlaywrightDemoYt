@@ -24,7 +24,7 @@ def test_run(playwright: Playwright) -> None:
     assert products_header.is_visible(), "User is unable to login"
     print('closing')
 
-
+    # test
     # burger_menu = page.locator("#react-burger-menu-btn")
 
 
